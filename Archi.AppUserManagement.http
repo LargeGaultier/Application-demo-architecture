@@ -1,0 +1,6 @@
+@Archi.AppUserManagement_HostAddress = http://localhost:5110
+
+GET {{Archi.AppUserManagement_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
