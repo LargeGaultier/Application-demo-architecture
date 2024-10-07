@@ -1,4 +1,4 @@
-﻿using Archi.AppUserManagement.Entities;
+﻿using Archi.AppUserManagement.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Archi.AppUserManagement.Persistence

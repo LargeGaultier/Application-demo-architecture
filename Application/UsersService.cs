@@ -1,9 +1,10 @@
-﻿using Archi.AppUserManagement.DTO;
-using Archi.AppUserManagement.Entities;
+﻿using Archi.AppUserManagement.Application;
+using Archi.AppUserManagement.Application.DTO.User;
+using Archi.AppUserManagement.Domain;
 using Archi.AppUserManagement.Persistence;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Archi.AppUserManagement.Business
+namespace Archi.AppUserManagement.Application
 {
     public class UsersService
     {

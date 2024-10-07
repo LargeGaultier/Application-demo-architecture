@@ -1,6 +1,5 @@
-﻿using Archi.AppUserManagement.Business;
-using Archi.AppUserManagement.DTO;
-using Archi.AppUserManagement.Entities;
+﻿using Archi.AppUserManagement.Application.DTO.User;
+using Archi.AppUserManagement.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

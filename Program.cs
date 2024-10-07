@@ -1,4 +1,4 @@
-using Archi.AppUserManagement.Business;
+using Archi.AppUserManagement.Application;
 using Archi.AppUserManagement.Persistence;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,4 +1,4 @@
-﻿namespace Archi.AppUserManagement.Entities.Shared
+﻿namespace Archi.AppUserManagement.Domain.Shared
 {
     public abstract class BaseEntity
     {

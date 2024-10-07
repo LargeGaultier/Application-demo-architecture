@@ -1,7 +1,7 @@
-﻿using Archi.AppUserManagement.Entities;
+﻿using Archi.AppUserManagement.Domain;
 using Archi.AppUserManagement.Persistence;
 
-namespace Archi.AppUserManagement.Business
+namespace Archi.AppUserManagement.Application
 {
     public class ProfilesService
     {

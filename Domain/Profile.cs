@@ -1,6 +1,6 @@
-﻿using Archi.AppUserManagement.Entities.Shared;
+﻿using Archi.AppUserManagement.Domain.Shared;
 
-namespace Archi.AppUserManagement.Entities
+namespace Archi.AppUserManagement.Domain
 {
     public class Profile : BaseEntity
     {
