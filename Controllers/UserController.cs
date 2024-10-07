@@ -2,6 +2,12 @@
 using Archi.AppUserManagement.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Archi.AppUserManagement.Application.User.Commands.AddUserCommand;
+using Archi.AppUserManagement.Application.User.Commands.UpdateUserCommand;
+using Microsoft.Identity.Client;
+using Archi.AppUserManagement.Application.User.Commands.DeleteUserCommand;
+using Archi.AppUserManagement.Application.User.Queries.GetAllUserQuery;
+using Archi.AppUserManagement.Application.User.Queries.GetUserByIdQuery;
 
 namespace Archi.AppUserManagement.Controllers
 {
@@ -9,38 +15,48 @@ namespace Archi.AppUserManagement.Controllers
     [ApiController]
     public class Users : ControllerBase
     {
-        public readonly UsersService _usersService;
-        public Users(UsersService usersService)
+        private readonly AddUserCommand _addUserCommand;
+        private readonly UpdateUserCommand _updateUserCommand;
+        private readonly DeleteUserCommand _deleteUserCommand;
+        private readonly GetAllUserQuery _getAllUserQuery;
+        private readonly GetUserByIdQuery _getUserByIdQuery
+
+       public Users(AddUserCommand addUserCommand, UpdateUserCommand updateUserCommand, DeleteUserCommand deleteUserCommand, GetAllUserQuery getAllUserQuery, GetUserByIdQuery getUserByIdQuery)
         {
-            _usersService = usersService;
+            _addUserCommand = addUserCommand;
+            _updateUserCommand = updateUserCommand;
+            _deleteUserCommand = deleteUserCommand;
+            _getAllUserQuery = getAllUserQuery;
+            _getUserByIdQuery = getUserByIdQuery;
+
         }
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_usersService.GetAllUsers());
+            return Ok(_getAllUserQuery.Execute());
         }
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_usersService.GetUser(id));
+            return Ok(_getUserByIdQuery.Execute(id));
         }
         [HttpPost]
         public IActionResult Post([FromBody] UserCreateDTO user)
         {
-            _usersService.AddUser(user);
+            _addUserCommand.Execute(user);
             return Ok();
         }
         [HttpPut]
         [Route("{id}")]
         public IActionResult Put(long id, [FromBody] UserCreateDTO user)
         {
-            _usersService.UpdateUser(user,id);
+            _updateUserCommand.Execute(user, id);
             return Ok();
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _usersService.RemoveUser(id);
+            _deleteUserCommand.Execute(id);
             return Ok();
         }
     }

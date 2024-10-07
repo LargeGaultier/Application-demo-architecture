@@ -1,4 +1,10 @@
 using Archi.AppUserManagement.Application;
+using Archi.AppUserManagement.Application.SharedService;
+using Archi.AppUserManagement.Application.User.Commands.AddUserCommand;
+using Archi.AppUserManagement.Application.User.Commands.DeleteUserCommand;
+using Archi.AppUserManagement.Application.User.Commands.UpdateUserCommand;
+using Archi.AppUserManagement.Application.User.Queries.GetAllUserQuery;
+using Archi.AppUserManagement.Application.User.Queries.GetUserByIdQuery;
 using Archi.AppUserManagement.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +18,12 @@ builder.Services.AddDbContext<UserManagementDbContext>(
                 options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=ArchiUserManagement;Integrated Security=true;TrustServerCertificate=true", o => o.EnableRetryOnFailure());
 
             }, ServiceLifetime.Singleton);
+builder.Services.AddTransient<AddUserCommand>();
+builder.Services.AddTransient<DeleteUserCommand>();
+builder.Services.AddTransient<UpdateUserCommand>();
+builder.Services.AddTransient<GetAllUserQuery>();
+builder.Services.AddTransient<GetUserByIdQuery>();
+
 builder.Services.AddTransient<UsersService>();
 builder.Services.AddTransient<ProfilesService>();
 builder.Services.AddControllers();

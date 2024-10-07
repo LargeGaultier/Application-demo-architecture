@@ -1,7 +1,7 @@
 ﻿using Archi.AppUserManagement.Domain;
 using Archi.AppUserManagement.Persistence;
 
-namespace Archi.AppUserManagement.Application
+namespace Archi.AppUserManagement.Application.SharedService
 {
     public class ProfilesService
     {
