@@ -13,8 +13,10 @@ namespace Archi.AppUserManagement.Persistence
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             modelBuilder.Entity<Profile>().HasData(new Profile { Id = 1, Code = "adm", Name = "Administrator" });
             modelBuilder.Entity<Profile>().HasData(new Profile { Id = 2, Code = "usr", Name = "User" });
+         
         }
 
        public DbSet<Profile> Profiles { get; set; }

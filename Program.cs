@@ -13,6 +13,7 @@ builder.Services.AddDbContext<UserManagementDbContext>(
 
             }, ServiceLifetime.Singleton);
 builder.Services.AddTransient<UsersService>();
+builder.Services.AddTransient<ProfilesService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

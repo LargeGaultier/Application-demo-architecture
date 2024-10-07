@@ -1,4 +1,5 @@
 ﻿using Archi.AppUserManagement.Business;
+using Archi.AppUserManagement.DTO;
 using Archi.AppUserManagement.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace Archi.AppUserManagement.Controllers
     public class Users : ControllerBase
     {
         public readonly UsersService _usersService;
-        public Users( UsersService usersService)
+        public Users(UsersService usersService)
         {
             _usersService = usersService;
         }
@@ -25,21 +26,22 @@ namespace Archi.AppUserManagement.Controllers
             return Ok(_usersService.GetUser(id));
         }
         [HttpPost]
-        public IActionResult Post([FromBody] User user)
+        public IActionResult Post([FromBody] UserCreateDTO user)
         {
             _usersService.AddUser(user);
             return Ok();
         }
         [HttpPut]
-        public IActionResult Put([FromBody] User user)
+        [Route("{id}")]
+        public IActionResult Put(long id, [FromBody] UserCreateDTO user)
         {
-            _usersService.UpdateUser(user);
+            _usersService.UpdateUser(user,id);
             return Ok();
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _usersService.RemoveUser(_usersService.GetUser(id));
+            _usersService.RemoveUser(id);
             return Ok();
         }
     }

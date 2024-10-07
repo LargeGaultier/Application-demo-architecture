@@ -1,50 +1,84 @@
-﻿using Archi.AppUserManagement.Entities;
+﻿using Archi.AppUserManagement.DTO;
+using Archi.AppUserManagement.Entities;
 using Archi.AppUserManagement.Persistence;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Archi.AppUserManagement.Business
 {
     public class UsersService
     {
-        private readonly UserManagementDbContext userManagementDbContext;
-        public UsersService(UserManagementDbContext userManagementDbContext)
+        private readonly UserManagementDbContext _userManagementDbContext;
+        private readonly ProfilesService _profileService;
+        public UsersService(UserManagementDbContext userManagementDbContext, ProfilesService profileService)
         {
-            this.userManagementDbContext = userManagementDbContext;
-                
+            _userManagementDbContext = userManagementDbContext;
+            _profileService = profileService;
+
         }
 
-        public void AddUser(User user)
+        public void AddUser(UserCreateDTO user)
         {
-            //si l'utilisateur a un mail qui se termine par @company.com alors il est administrateur dont le code du profile est adm
-            if (user.Email.EndsWith("@company.com"))
+         
+            var newUser = new User()
             {
-                user.Profile = userManagementDbContext.Profiles.Find("adm");
-            }
-            else
-            {
-                user.Profile = userManagementDbContext.Profiles.Find("usr");
-            }
-            userManagementDbContext.Users.Add(user);
-            userManagementDbContext.SaveChanges();
-        }
-        public void RemoveUser(User user)
-        {
-            userManagementDbContext.Users.Remove(user);
-            userManagementDbContext.SaveChanges();
-        }
-        public User GetUser(int id)
-        {
-               return userManagementDbContext.Users.Find(id);
-        }
-        public void UpdateUser(User user)
-        {
-               userManagementDbContext.Users.Update(user);
-            userManagementDbContext.SaveChanges();
-        }
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                Profile = _profileService.GetProfileToSetByEmail(user.Email)
+        };
+            _userManagementDbContext.Users.Add(newUser);
+            _userManagementDbContext.SaveChanges();
 
-        public List<User> GetAllUsers ()
-        {
-            return userManagementDbContext.Users.ToList();
         }
         
+        public void RemoveUser(long id)
+        {
+            _userManagementDbContext.Users.Remove(_userManagementDbContext.Users.First(x => x.Id == id));
+            _userManagementDbContext.SaveChanges();
+        }
+        public UserDTO? GetUser(int id)
+        {
+            return _userManagementDbContext.Users.Select(x => new UserDTO()
+            {
+                Id = x.Id,
+                Email = x.Email,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                PhoneNumber = x.PhoneNumber,
+                ProfileCode = x.Profile.Code,
+                ProfileName = x.Profile.Name
+            }).FirstOrDefault(x => x.Id == id);
+        }
+        public void UpdateUser(UserCreateDTO userDto,long idUser)
+        {
+            var userToUpdate = _userManagementDbContext.Users.First(x => x.Id == idUser);
+            userToUpdate.Email = userDto.Email;
+            userToUpdate.FirstName = userDto.FirstName;
+            userToUpdate.LastName = userDto.LastName;
+            userToUpdate.PhoneNumber = userDto.PhoneNumber;
+            userToUpdate.Profile = _profileService.GetProfileToSetByEmail(userDto.Email);
+            _userManagementDbContext.Users.Update(userToUpdate);
+            _userManagementDbContext.SaveChanges();
+        }
+
+        public List<UserDTO> GetAllUsers()
+        {
+            return _userManagementDbContext.Users.Select(x => new UserDTO()
+            {
+                Id = x.Id,
+                Email = x.Email,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                PhoneNumber = x.PhoneNumber,
+                ProfileCode = x.Profile.Code,
+                ProfileName = x.Profile.Name
+
+            }).ToList();
+        }
+
+      
+
+
     }
 }
