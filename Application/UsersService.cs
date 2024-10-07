@@ -1,5 +1,5 @@
-﻿using Archi.AppUserManagement.Application;
-using Archi.AppUserManagement.Application.DTO.User;
+﻿using Archi.AppUserManagement.Application.DTO.User;
+using Archi.AppUserManagement.Application.SharedService;
 using Archi.AppUserManagement.Domain;
 using Archi.AppUserManagement.Persistence;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -20,7 +20,7 @@ namespace Archi.AppUserManagement.Application
         public void AddUser(UserCreateDTO user)
         {
          
-            var newUser = new User()
+            var newUser = new Domain.User()
             {
                 Email = user.Email,
                 FirstName = user.FirstName,
