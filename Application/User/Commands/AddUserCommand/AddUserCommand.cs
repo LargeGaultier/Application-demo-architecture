@@ -3,20 +3,27 @@ using Archi.AppUserManagement.Application.Shared;
 using Archi.AppUserManagement.Persistence;
 using Archi.AppUserManagement.Domain;
 using Archi.AppUserManagement.Application.SharedService;
+using Archi.AppBankAccountManagement.External;
 
 namespace Archi.AppUserManagement.Application.User.Commands.AddUserCommand
 {
-    public class AddUserCommand : UseCaseBase
+    public class AddUserCommand : UseCaseBase<UserManagementDbContext>
     {
         private readonly ProfilesService _profileService;
-        public AddUserCommand(UserManagementDbContext userManagementDbContext, ProfilesService profilesService) : base(userManagementDbContext)
+        private readonly BankAccountManagementServiceConnector _bankAccountManagementServiceConnector;
+        public AddUserCommand(UserManagementDbContext userManagementDbContext,
+            ProfilesService profilesService,
+            BankAccountManagementServiceConnector bankAccountManagementServiceConnector) : base(userManagementDbContext)
         {
             _profileService = profilesService;
+            _bankAccountManagementServiceConnector = bankAccountManagementServiceConnector;
         }
 
+       
 
 
-        public void Execute(UserCreateDTO user)
+
+        public async Task Execute(UserCreateDTO user)
         {
 
             var newUser = new Domain.User()
@@ -27,8 +34,20 @@ namespace Archi.AppUserManagement.Application.User.Commands.AddUserCommand
                 PhoneNumber = user.PhoneNumber,
                 Profile = _profileService.GetProfileToSetByEmail(user.Email)
             };
-            UserManagementDbContext.Users.Add(newUser);
-            UserManagementDbContext.SaveChanges();
+            DbContext.Users.Add(newUser);
+            DbContext.SaveChanges();
+
+            try
+            {
+                await _bankAccountManagementServiceConnector.BankAccountCreation(newUser.Id);
+            }
+            catch (Exception)
+            {
+                DbContext.Users.Remove(newUser);
+                DbContext.SaveChanges();
+                throw;
+            }
+          
 
         }
     }

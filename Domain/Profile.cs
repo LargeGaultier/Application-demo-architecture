@@ -1,4 +1,4 @@
-﻿using Archi.AppUserManagement.Domain.Shared;
+﻿using Archi.Shared.Domain;
 
 namespace Archi.AppUserManagement.Domain
 {

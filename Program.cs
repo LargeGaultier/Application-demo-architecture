@@ -1,3 +1,4 @@
+using Archi.AppBankAccountManagement.External;
 using Archi.AppUserManagement.Application;
 using Archi.AppUserManagement.Application.SharedService;
 using Archi.AppUserManagement.Application.User.Commands.AddUserCommand;
@@ -23,6 +24,7 @@ builder.Services.AddTransient<DeleteUserCommand>();
 builder.Services.AddTransient<UpdateUserCommand>();
 builder.Services.AddTransient<GetAllUserQuery>();
 builder.Services.AddTransient<GetUserByIdQuery>();
+builder.Services.AddTransient<BankAccountManagementServiceConnector>();
 
 builder.Services.AddTransient<UsersService>();
 builder.Services.AddTransient<ProfilesService>();

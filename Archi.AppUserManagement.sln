@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archi.AppUserManagement", "Archi.AppUserManagement.csproj", "{A06A0769-2113-497D-A1AE-A5D96906FE41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Archi.AppUserManagement", "Archi.AppUserManagement.csproj", "{A06A0769-2113-497D-A1AE-A5D96906FE41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archi.AppBankAccountManagement", "..\Archi.AppBankAccountManagement\Archi.AppBankAccountManagement.csproj", "{8831E324-37F1-40E7-B99D-2F4232B5005E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archi.Shared", "..\Archi.Shared\Archi.Shared.csproj", "{0FC2C2A9-D5DC-46B0-BFEE-A513391EEFAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{A06A0769-2113-497D-A1AE-A5D96906FE41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A06A0769-2113-497D-A1AE-A5D96906FE41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A06A0769-2113-497D-A1AE-A5D96906FE41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8831E324-37F1-40E7-B99D-2F4232B5005E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8831E324-37F1-40E7-B99D-2F4232B5005E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8831E324-37F1-40E7-B99D-2F4232B5005E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8831E324-37F1-40E7-B99D-2F4232B5005E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FC2C2A9-D5DC-46B0-BFEE-A513391EEFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FC2C2A9-D5DC-46B0-BFEE-A513391EEFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FC2C2A9-D5DC-46B0-BFEE-A513391EEFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FC2C2A9-D5DC-46B0-BFEE-A513391EEFAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,16 +3,16 @@ using Archi.AppUserManagement.Persistence;
 
 namespace Archi.AppUserManagement.Application.User.Commands.DeleteUserCommand
 {
-    public class DeleteUserCommand : UseCaseBase
+    public class DeleteUserCommand : UseCaseBase<UserManagementDbContext>
     {
         public DeleteUserCommand(UserManagementDbContext userManagementDbContext) : base(userManagementDbContext)
         {
         }
         public void Execute(long id)
         {
-            var user = UserManagementDbContext.Users.Find(id);
-            UserManagementDbContext.Users.Remove(user);
-            UserManagementDbContext.SaveChanges();
+            var user = DbContext.Users.Find(id);
+            DbContext.Users.Remove(user);
+            DbContext.SaveChanges();
         }
     }
     

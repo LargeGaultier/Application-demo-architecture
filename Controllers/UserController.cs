@@ -41,9 +41,9 @@ namespace Archi.AppUserManagement.Controllers
             return Ok(_getUserByIdQuery.Execute(id));
         }
         [HttpPost]
-        public IActionResult Post([FromBody] UserCreateDTO user)
+        public async Task<IActionResult> Post([FromBody] UserCreateDTO user)
         {
-            _addUserCommand.Execute(user);
+            await _addUserCommand.Execute(user);
             return Ok();
         }
         [HttpPut]

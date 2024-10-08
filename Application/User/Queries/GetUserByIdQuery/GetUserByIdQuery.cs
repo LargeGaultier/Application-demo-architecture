@@ -4,14 +4,14 @@ using Archi.AppUserManagement.Persistence;
 
 namespace Archi.AppUserManagement.Application.User.Queries.GetUserByIdQuery
 {
-    public class GetUserByIdQuery : UseCaseBase
+    public class GetUserByIdQuery : UseCaseBase<UserManagementDbContext>
     {
         public GetUserByIdQuery(UserManagementDbContext userManagementDbContext) : base(userManagementDbContext)
         {
         }
         public UserDTO Execute(long id)
         {
-            return UserManagementDbContext.Users.Select(x => new UserDTO()
+            return DbContext.Users.Select(x => new UserDTO()
             {
                 Id = x.Id,
                 Email = x.Email,

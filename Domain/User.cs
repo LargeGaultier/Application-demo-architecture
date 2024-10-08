@@ -1,5 +1,4 @@
-﻿using Archi.AppUserManagement.Domain.Shared;
-
+﻿using Archi.Shared.Domain;
 namespace Archi.AppUserManagement.Domain
 {
     public class User : BaseEntity
@@ -8,7 +7,6 @@ namespace Archi.AppUserManagement.Domain
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-
         public Profile Profile { get; set; }
     }
 }

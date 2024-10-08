@@ -5,7 +5,7 @@ using Archi.AppUserManagement.Persistence;
 
 namespace Archi.AppUserManagement.Application.User.Commands.UpdateUserCommand
 {
-    public class UpdateUserCommand : UseCaseBase
+    public class UpdateUserCommand : UseCaseBase<UserManagementDbContext>
     {
         private readonly ProfilesService _profileService;
         public UpdateUserCommand(UserManagementDbContext userManagementDbContext, ProfilesService profilesService) : base(userManagementDbContext)
@@ -15,13 +15,13 @@ namespace Archi.AppUserManagement.Application.User.Commands.UpdateUserCommand
 
         public void Execute(UserCreateDTO user,long id)
         {
-            var userToUpdate = UserManagementDbContext.Users.Find(id);
+            var userToUpdate = DbContext.Users.Find(id);
             userToUpdate.Email = user.Email;
             userToUpdate.FirstName = user.FirstName;
             userToUpdate.LastName = user.LastName;
             userToUpdate.PhoneNumber = user.PhoneNumber;
             userToUpdate.Profile = _profileService.GetProfileToSetByEmail(user.Email);
-            UserManagementDbContext.SaveChanges();
+            DbContext.SaveChanges();
         }
     }
   
