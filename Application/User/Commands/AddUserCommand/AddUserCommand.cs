@@ -19,7 +19,7 @@ namespace Archi.AppUserManagement.Application.User.Commands.AddUserCommand
             _bankAccountManagementServiceConnector = bankAccountManagementServiceConnector;
         }
 
-       
+
 
 
 
@@ -37,19 +37,18 @@ namespace Archi.AppUserManagement.Application.User.Commands.AddUserCommand
             DbContext.Users.Add(newUser);
             DbContext.SaveChanges();
 
-            try
-            {
-                await _bankAccountManagementServiceConnector.BankAccountCreation(newUser.Id);
-            }
-            catch (Exception)
+
+            if (!await _bankAccountManagementServiceConnector.BankAccountCreation(newUser.Id))
             {
                 DbContext.Users.Remove(newUser);
                 DbContext.SaveChanges();
-                throw;
-            }
-          
-
+                throw new Exception();
+            };
         }
+
+
+
     }
+}
   
 }

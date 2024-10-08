@@ -1,6 +1,7 @@
 ﻿using Archi.AppUserManagement.Application.DTO.User;
 using Archi.AppUserManagement.Application.Shared;
 using Archi.AppUserManagement.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Archi.AppUserManagement.Application.User.Queries.GetAllUserQuery
 {
@@ -11,7 +12,7 @@ namespace Archi.AppUserManagement.Application.User.Queries.GetAllUserQuery
         }
         public List<UserDTO> Execute()
         {
-            var users = DbContext.Users.ToList();
+            var users = DbContext.Users.Include(x=> x.Profile).ToList();
             return users.Select(user => new UserDTO
             {
                 Id = user.Id,
